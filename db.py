@@ -19,5 +19,9 @@ def getAllNotes():
     res = cur.execute("SELECT * FROM note")
     return res.fetchall()
 
+def searchByTitle(title):
+    cur.execute("SELECT * FROM note WHERE title LIKE ?", (f'%{title}%',))
+    results = cur.fetchall()
+    return results
 
-print(getAllNotes())
+
