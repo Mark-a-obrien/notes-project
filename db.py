@@ -3,28 +3,27 @@ con = sqlite3.connect("notes.db")
 cur = con.cursor()
 
 def createNoteTable():
-    cur.execute("CREATE TABLE note(id, title, text)")
+    cur.execute("CREATE TABLE note(id INTEGER PRIMARY KEY AUTOINCREMENT, title, text)")
 
-
-def createNoteOnDB():
-    cur.execute("""
-    INSERT INTO note VALUES
-        (0, "This is a note babyyyyyyyyyyyyy", "This is the note."),
-        (1, "Note note", "Super secret note.")
+def createNoteOnDB(note):
+    cur.execute(f"""
+    INSERT INTO note (title, text)
+        VALUES 
+        ("{note['title']}", "{note['text']}")
     """)
     con.commit()
 
-
-def getAllNotes():
+def getAllNotesOnDB():
     res = cur.execute("SELECT * FROM note")
     return res.fetchall()
 
-def searchByTitle(title):
+def searchByTitleOnDB(title):
     cur.execute("SELECT * FROM note WHERE title LIKE ?", (f'%{title}%',))
     results = cur.fetchall()
     return results
 
-def deleteByID(id):
+def deleteByIdOnDB(id):
     cur.execute(f"Delete FROM note WHERE ID={id}")
     con.commit()
-    
+
+
