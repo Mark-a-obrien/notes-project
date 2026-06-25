@@ -24,4 +24,7 @@ def searchByTitle(title):
     results = cur.fetchall()
     return results
 
-
+def deleteByID(id):
+    cur.execute(f"Delete FROM note WHERE ID={id}")
+    con.commit()
+    
