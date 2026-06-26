@@ -1,9 +1,17 @@
 from db import *
+from pydantic import BaseModel
+
+
+class note(BaseModel):
+    title:str
+    text:str
 
 def createNote():
     title = input("Enter title: ")
     text = input("Enter text: ")
-    createNoteOnDB({"title":title, "text":text}) 
+    note.title =  title
+    note.text = text
+    createNoteOnDB(note) 
 
 def displayAllNotes():
     for i in getAllNotesOnDB():

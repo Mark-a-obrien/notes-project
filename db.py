@@ -9,7 +9,7 @@ def createNoteOnDB(note):
     cur.execute(f"""
     INSERT INTO note (title, text)
         VALUES 
-        ("{note['title']}", "{note['text']}")
+        ("{note.title}", "{note.text}")
     """)
     con.commit()
 
